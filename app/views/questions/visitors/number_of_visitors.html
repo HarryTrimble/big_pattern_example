@@ -1,0 +1,41 @@
+{% extends "layout.html" %} {% block page_title %} Example - Forms {% endblock %} {% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_alpha.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form method="get" action="/questions/result" class="form">
+
+      {{formData | safe}}
+
+        <h1 class="heading-large">
+          How many other people will be using your firearms?
+        </h1>
+
+        <p>Appying for a visitor permit costs <span class="bold">£20.00</span> per person</p>
+
+        <fieldset>
+          <legend class="visuallyhidden">
+            How many other people will be using your firearms? 
+          </legend>
+
+          <label class="form-label" for="full-name-f1">Number of people</label>
+          <input class="form-control" id="full-name-f1" type="text" name="number_of_visitors">
+
+          <br>
+          <br>
+
+        </fieldset>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue" />
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</main>
+{% endblock %}

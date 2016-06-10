@@ -1,0 +1,48 @@
+{% extends "layout.html" %} {% block page_title %} Example - Forms {% endblock %} {% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_alpha.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form method="get" action="/questions/shotguns" class="form">
+
+      {{formData | safe}}
+
+        <h1 class="heading-large">
+          Are you wanting to possess and use rifles?
+        </h1>
+
+        <p>Applying to own rifles costs <span class="bold">£88</span></p>
+
+        <fieldset>
+          <legend class="visuallyhidden">
+            Are you wanting to possess and use rifles?
+          </legend>
+
+          <div class="form-group">
+            <label for="rifles-1" class="block-label">
+              <input type="radio" id="rifles-1" name="rifles" value="yes">
+              Yes
+            </label>
+
+            <label for="rifles-2" class="block-label">
+              <input type="radio" id="rifles-2" name="rifles" value="no">
+              No
+            </label>
+
+          </div>
+
+        </fieldset>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue" />
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</main>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "layout.html" %} {% block page_title %} Example - Forms {% endblock %} {% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_alpha.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form method="get" action="/questions/air_weapon" class="form">
+
+      {{formData | safe}}
+
+        <h1 class="heading-large">
+          Are you wanting to possess and use prohibited weapons?
+        </h1>
+
+        <p>These include revolvers, centre fire self-loading rifles, handguns, machine guns etc.</p>
+
+        <fieldset>
+          <legend class="visuallyhidden">
+            Are you wanting to possess and use prohibited weapons?
+          </legend>
+
+          <div class="form-group">
+            <label for="prohibited_weapons-1" class="block-label">
+              <input type="radio" id="prohibited_weapons-1" name="prohibited_weapons" value="yes">
+              Yes
+            </label>
+
+            <label for="prohibited_weapons-2" class="block-label">
+              <input type="radio" id="prohibited_weapons-2" name="prohibited_weapons" value="no">
+              No
+            </label>
+
+          </div>
+
+        </fieldset>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue" />
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</main>
+{% endblock %}

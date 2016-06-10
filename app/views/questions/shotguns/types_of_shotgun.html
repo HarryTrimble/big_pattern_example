@@ -1,0 +1,56 @@
+{% extends "layout.html" %} {% block page_title %} Example - Forms {% endblock %} {% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_alpha.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      <form method="get" action="/questions/visitors" class="form">
+
+      {{formData | safe}}
+
+        <h1 class="heading-large">
+          What types of shotgun are you wanting to possess and use? 
+        </h1>
+
+        <fieldset>
+          <legend class="visuallyhidden">
+            What types of shotgun are you wanting to possess and use? 
+          </legend>
+
+          <div class="form-group">
+            <label for="types_of_shotgun-1" class="block-label">
+              <input type="checkbox" id="types_of_shotgun-1" name="types_of_shotgun" value="type_1_smooth_bore">
+              A shotgun, smooth bore gun
+            </label>
+
+            <label for="types_of_shotgun-2" class="block-label">
+              <input type="checkbox" id="types_of_shotgun-2" name="types_of_shotgun" value="type_2_short_barrell">
+              A shoutgun, having barrell not less than 24" (60.96cm) and bore less than 2" (5.08cm)
+            </label>
+
+            <label for="types_of_shotgun-3" class="block-label">
+              <input type="checkbox" id="types_of_shotgun-3" name="types_of_shotgun" value="type_3_smooth_bore">
+              A shoutgun, either having no magazine, or a non-detachable magazine incapable of holding more than two cartridges
+            </label>
+
+            <label for="types_of_shotgun-4" class="block-label">
+              <input type="checkbox" id="types_of_shotgun-4" name="types_of_shotgun" value="type_1_smooth_bore">
+              Shotgun not on this list
+            </label>
+
+          </div>
+
+        </fieldset>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue" />
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</main>
+{% endblock %}

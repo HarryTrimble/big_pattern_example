@@ -1,0 +1,192 @@
+{% extends "layout.html" %} {% block page_title %} Example - Forms {% endblock %} {% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_alpha.html" %}
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+        <!-- service not available in these countries -->
+        {% if 
+          data.country=="northern_ireland" or
+          data.country=="scotland"
+        %}
+
+          {% if data.country=="northern_ireland" %}
+            <h1 class="heading-large">
+              Apply for firearm licence in Northern Ireland
+            </h1>
+
+            <br>
+
+            <p class="lede">Use a different <a href="https://www.psni.police.uk/advice_information/firearms/">service</a> to apply for a firearm licence in Northern Ireland</p>
+          {% endif %}
+
+          {% if data.country=="scotland" %}
+            <h1 class="heading-large">
+              Apply for firearm licence in Scotland
+            </h1>
+
+            <br>
+
+            <p class="lede">Use a different <a href="http://www.scotland.police.uk/about-us/finance/service-fees-and-charges/firearms/">service</a> to apply for a firearm licence in Scotland</p>
+          {% endif %}
+
+        <!-- not eligible -->
+        {% elif 
+          data.prohibited_weapons=="yes"
+        %}
+
+          {{formData | safe}}
+
+          <h1 class="heading-large">
+            Apply for a bespoke firearm licence
+          </h1>
+
+          <br>
+
+          <!-- reason not eligibile: prohibited firearms -->
+          {% if data.prohibited_weapons=="yes" %}
+            <p class="lede">To possess and use prohibited weapons you need to apply for a <a href="https://www.gov.uk/government/publications/possess-purchase-acquire-manufacture-sell-or-transfer-prohibited-weapons-and-or-ammunition-application-form"> bespoke permit</a> from the Home Office</p>
+          {% endif %}        
+        
+        <!-- not eligible -->
+        {% elif 
+          data.prison=="yes" or
+          data.over18=="no" or
+          data.prohibited_weapons=="yes" or
+          data.number_of_visitors | int > 6
+        %}
+
+          <form method="get" action="#" class="form">
+
+          {{formData | safe}}
+
+          <h1 class="heading-large">
+            You are not eligible for a firearm licence
+          </h1>
+
+          <br>
+
+          <!-- reason not eligibile: prison -->
+          {% if data.prison=="yes" %}
+            <p class="lede">Spending 3 or more years in prison makes you not eligible for a fireram licence</p>
+          {% endif %}
+
+          <!-- reason not eligibile: prison -->
+          {% if data.over18=="no" %}
+            <p class="lede">You must be 18 or over to possess and use firearms</p>
+          {% endif %}
+
+          <!-- reason not eligibile: visitors -->
+          {% if data.number_of_visitors | int > 6 %}
+            <p class="lede">Only six or less people can be supervised using one firearm licence.</p>
+          {% endif %}          
+
+
+        <!-- eligible -->
+        {% elif 
+          data.rifles=="yes" or 
+          data.shotguns=="yes" or 
+          data.visitors=="yes" 
+        %}
+
+            <form method="get" action="#" class="form">
+
+            {{formData | safe}}
+
+            <h1 class="heading-large">
+              You are eligible for a firearm licence
+            </h1>
+
+            <br>
+
+
+            <!-- application fee calculator -->
+            <p class="lede">The cost of applying is <span class="bold">£<span id="cost"></span></span></p>
+            
+            <!-- application fee calculator -->
+            <script>
+
+              var query = location.search.substr(1);
+              var result = {};
+              query.split("&").forEach(function(part) {
+                var item = part.split("=");
+                result[item[0]] = decodeURIComponent(item[1]);
+              });
+              data = result;
+              console.log(data)
+
+              var costToPay = 0;
+              if(data.shotguns = 'yes'){
+                costToPay += 79.5
+              }
+              if(data.rifles = 'yes'){
+                costToPay += 88
+              }
+
+              if(typeof data.number_of_visitors !== 'undefined'){
+                number_of_visitors = parseInt(data.number_of_visitors)
+                var visitorCost = number_of_visitors*20
+                costToPay += visitorCost
+              }
+
+              costToPay = costToPay.toFixed(2)
+
+              document.getElementById('cost').innerHTML = costToPay
+
+            </script>
+
+            <p class="lede">Check <a href="/show_rules">licence rules</a> before applying.</p>
+            <p class="lede">Check <a href="/to_do_list">application tasks</a> before applying.</p>
+
+            <br>
+
+            <div class="form-group">
+              <input type="submit" class="button button-start" value="Apply now"/>
+            </div>
+
+        <!-- no licence needed -->
+        {% elif data.air_weapon=="yes" %}
+
+            <form method="get" action="/questions/result/view_conditions_yes_no" class="form">
+
+            {{formData | safe}}
+
+            <h1 class="heading-large">
+              You do not need a firearm licence
+            </h1>
+
+            <br>
+
+            <p class="lede">To possess and use a air weapon does not require a licence</p>
+
+            <p class="lede">You must be over 18 to use a air rifle or pistol</p>
+
+            <br>
+
+        {% endif %}
+
+        <!-- permit 
+        {% if data.dredging_distance=="permit" %}
+
+        <h1 class="heading-large">
+          You need to apply for a permit
+        </h1>
+
+        <br>
+
+        <p class="lede">It costs £50 to apply for a permit.</p>
+        <p class="lede">Check activity conditions before applying.</p>
+
+        <br />
+
+        {% endif %}
+        -->
+
+      </form>
+
+    </div>
+  </div>
+
+</main>
+{% endblock %}

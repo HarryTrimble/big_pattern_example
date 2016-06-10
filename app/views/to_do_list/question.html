@@ -1,0 +1,122 @@
+{% extends "layout.html" %}
+{% block page_title %} Example - Forms {% endblock %}
+
+{% block extra_css %}<link rel="stylesheet" href="/public/stylesheets/dm_list.css" />{% endblock %}
+
+{% block content %}
+<main id="content" role="main">
+  {% include "includes/phase_banner_alpha.html" %}
+
+  <div class="breadcrumbs">
+    <ol>
+      <li>
+        Questions
+      </li>
+      <li>
+        result
+      </li>
+      <li>
+        application tasks
+      </li>
+    </ol>
+  </div>
+
+   <div id="wrapper">
+    <main id="content" role="main">
+      
+
+  
+    <div class="single-question-page">
+  
+
+  <div class="grid-row">
+    <div class="column-two-thirds">
+
+      
+        <header class="page-heading-smaller page-heading-without-breadcrumb">
+        <h1>
+          A field 
+        </h1>
+</header>
+      
+
+    </div>
+  </div>
+
+  
+
+  <form method="get" enctype="multipart/form-data" action="/to_do_list">
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+          
+            
+              
+    
+  
+
+
+  
+
+
+
+  <div class="question" id="title">
+    <label for="input-title">
+      <span class="question-heading-with-hint">
+        
+        <p>Some help with your question</p>
+        
+      </span>
+      
+    </label>
+    
+    
+    <span class="question-advice" id="input-title-question-advice">
+      <p>Some help with your answer</p>
+    </span>
+    
+    
+    <span class="hint" id="input-title-answer-advice">
+      <p>100 characters maximum</p>
+    </span>
+    
+    
+      
+      <input type="text" name="" id="input-field" class="text-box" value="">
+      
+    
+  </div>
+
+  
+            
+          
+          
+
+  
+    <input type="submit" class="button-save" value="Save and continue">
+  
+
+  
+    <div class="secondary-action-link">
+  <a href="/to_do_list">Return to overview</a>
+</div>
+  
+
+
+
+      </div>
+    </div>
+
+  </form>
+
+  
+    </div>
+    
+  <!-- bottom of list -->
+    
+  </div>
+
+</main>
+{% endblock %}
+{% block extra_js_1 %}<!-- ticky list javascript one -->{% endblock %}
+{% block extra_js_2 %}<!-- ticky list javascript two -->{% endblock %}
